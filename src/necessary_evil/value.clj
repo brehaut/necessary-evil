@@ -4,7 +4,7 @@
    response faults.
 
    The library has a pair of functions, parse-value and value-elem,
-   that are used for reading and writing values. 
+   that are used for reading and writing values.
 
    The value types handled by this library can be extended by creating
    new method implementations for the parse-value multimethod where
@@ -89,7 +89,7 @@
                                (value-elem value)]))
 
 (extend-protocol ValueTypeElem
-  String 
+  String
   (value-type-elem [this] (elem :string [this]))
 
   Integer
@@ -97,26 +97,29 @@
 
   Boolean
   (value-type-elem [this] (elem :boolean [(if this "1" "0")]))
-  
+
   Double
   (value-type-elem [this] (elem :double [(str this)]))
-                                       
+
   org.joda.time.DateTime
   (value-type-elem [this] (elem :dateTime.iso8601 [(time-format/unparse
                                                     winer-time
                                                     this)]))
-  
+
   clojure.lang.IPersistentVector ; a vector becomes an xml-rpc array
   (value-type-elem [this] (elem :array [(elem :data (vec (map value-elem this)))]))
-  
-  clojure.lang.IPersistentMap ; a map becomes a xml-rpc struct 
-  (value-type-elem [this] (elem :struct (vec (map struct-member-elem this)))))
+
+  clojure.lang.IPersistentMap ; a map becomes a xml-rpc struct
+  (value-type-elem [this] (elem :struct (vec (map struct-member-elem this))))
+
+  Object
+  (value-type-elem [this] (elem :string [(str this)])))
 
 ;; extends ValueTypeElem for Byte Arrays. This slightly is awkward,
 ;; perhaps there is a better approach
-(extend (Class/forName "[B") 
+(extend (Class/forName "[B")
    ValueTypeElem
    {:value-type-elem (fn [this] (elem :base64 [(String. (Base64/encodeBase64 this))]))})
 
-   
-   
+
+
