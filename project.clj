@@ -4,10 +4,10 @@
   :dependencies [[org.clojure/clojure "[1.2.1],[1.3.0]"]
                  [org.clojure/data.zip "0.1.0"]
                  [org.clojure/algo.monads "0.1.1-SNAPSHOT"]
-                 [clj-http "0.1.3"]
+                 [clj-http "0.2.7"]
                  [commons-codec "1.4"]
                  [clj-time "0.3.1"]
                  [commons-lang "2.6"]]
-  :dev-dependencies [[ring/ring-jetty-adapter "0.3.11"]
+  :dev-dependencies [[ring/ring-jetty-adapter "1.0.1"]
                      [marginalia "0.7.0-SNAPSHOT"]
                      [lein-marginalia "0.6.1"]])

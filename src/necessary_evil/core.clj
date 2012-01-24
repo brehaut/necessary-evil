@@ -47,14 +47,19 @@
 
 ;; client functions
 
+(defn- make-headers
+  [body opts]
+  (merge  {:body body
+           :content-type "text/xml;charset=UTF-8"}
+          opts))
+
 (defn call
   "Does a syncronous http request to the server and method provided."
-  [endpoint-url method-name & args]
-  (let [call (methodcall/methodcall method-name args)
-        body (-> call methodcall/unparse emit with-out-str)]
-    (-> (http/post endpoint-url {:body body
-                                 :content-type "text/xml;charset=UTF-8"})
-        :body
-        to-xml
-        methodresponse/parse)))
+  ([endpoint-url method-name http-opts & args]
+     (let [call (methodcall/methodcall method-name args)
+           body (-> call methodcall/unparse emit with-out-str)]
+       (-> (http/post endpoint-url (make-headers body http-opts))
+           :body
+           to-xml
+           methodresponse/parse))))
 

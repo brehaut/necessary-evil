@@ -1,1 +1,3 @@
 lib/*.jar
+lib/dev
+.lein-deps-sum
