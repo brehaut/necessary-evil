@@ -1,10 +1,3 @@
-        
-<section>
-### Notice: Maintainer wanted
-
-I no longer have time to maintain this project in a timely manner and am looking for someone to take over. If you are interested please contact me.
-</section>
-
 # necessary-evil
 
 *necessary-evil* is an implementation of [XML-RPC](http://xml-rpc.com/)
